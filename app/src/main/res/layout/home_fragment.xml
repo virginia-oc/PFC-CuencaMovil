@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/imageCover"
+                android:layout_width="match_parent"
+                android:layout_height="253dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/cuenca_inicio" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginRight="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/btn_notifyIncident"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="@string/app_name"
+                    android:text="@string/btn_notifyIncident"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></Button>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_makeRequest"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:contentDescription="@string/app_name"
+                    android:text="@string/btn_makeRequest"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"></Button>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="35dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    app:cardBackgroundColor="@color/md_theme_dark_onTertiaryContainer"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_tituloCardviewHistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="@string/tv_tituloCardviewHistory"
+                            android:textColor="@color/md_theme_dark_onPrimary"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_history"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_below="@id/tv_tituloCardviewHistory"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/pavimentoroto" />
+
+                        <Button
+                            android:id="@+id/btn_historyIncident"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/iv_history"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/btn_cardviewHome"
+                            android:textSize="10sp"/>
+
+                        <Button
+                            android:id="@+id/btn_historyRequest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/iv_history"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/btn_cardviewHome"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_socialMedia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    app:cardBackgroundColor="@color/md_theme_dark_onTertiaryContainer"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="12dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/cardview_history">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_tituloCardview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="@string/tv_tituloCardviewTwitter"
+                            android:textColor="@color/md_theme_dark_onPrimary"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_twitter"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_below="@id/tv_tituloCardview"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/twittertest" />
+
+                        <Button
+                            android:id="@+id/btn_socialMedia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/iv_twitter"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/btn_cardviewHome"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_associations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    app:cardBackgroundColor="@color/md_theme_dark_onTertiaryContainer"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/cardview_socialMedia"
+                    android:layout_marginTop="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_tituloCardviewAssociations"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="@string/tv_tituloCardviewAssociations"
+                            android:textColor="@color/md_theme_dark_onPrimary"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_associations"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_below="@id/tv_tituloCardviewAssociations"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/culturalassociations" />
+
+                        <Button
+                            android:id="@+id/btn_associations"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/iv_associations"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/btn_cardviewHome"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Cuenca Móvil</string>
+    <string name="txt_open">Open</string>
+    <string name="txt_close">Close</string>
+    <string name="header_navigationbar">Cuenca Móvil</string>
+    <string name="nav_title_help">Ayuda</string>
+    <string name="nav_title_share">Comunicación</string>
+    <string name="nav_title_legal">Legal</string>
+    <string name="nav_faq">Preguntas frecuentes</string>
+    <string name="nav_problems">¿La app no funciona bien?</string>
+    <string name="nav_share">Compartir</string>
+    <string name="nav_privacy">Política de privacidad</string>
+    <string name="nav_terms">Términos y condiciones</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_title_home">Navegación</string>
+    <string name="btn_notifyIncident">Notificar incidencia</string>
+    <string name="btn_makeRequest">Crear petición</string>
+    <string name="btn_checkHistorial">Historial de incidencias</string>
+    <string name="tv_tituloCardviewTwitter">Cuenca en las redes</string>
+    <string name="tv_tituloCardviewAssociations">Asociaciones culturales</string>
+    <string name="btn_cardviewHome">Ver más</string>
+    <string name="tv_tituloCardviewHistory">Historial de incidencias</string>
+</resources>

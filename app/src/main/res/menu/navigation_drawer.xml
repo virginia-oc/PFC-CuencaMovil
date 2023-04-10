@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="none">
+
+        <item
+            android:title="@string/nav_title_home">
+            <menu>
+                <item
+                    android:id="@+id/item01"
+                    android:icon="@drawable/home_48px"
+                    android:title="@string/nav_home" />
+            </menu>
+        </item>
+
+        <item
+            android:title="@string/nav_title_help">
+            <menu>
+                <item
+                    android:id="@+id/item11"
+                    android:icon="@drawable/help_48px"
+                    android:title="@string/nav_faq" />
+                <item
+                    android:id="@+id/item12"
+                    android:icon="@drawable/chat_error_48px"
+                    android:title="@string/nav_problems" />
+            </menu>
+        </item>
+
+        <item
+            android:title="@string/nav_title_share">
+            <menu>
+                <item
+                    android:id="@+id/item21"
+                    android:icon="@drawable/share_48px"
+                    android:title="@string/nav_share" />
+            </menu>
+        </item>
+
+        <item
+            android:title="@string/nav_title_legal">
+            <menu>
+                <item
+                    android:id="@+id/item31"
+                    android:icon="@drawable/security_48px"
+                    android:title="@string/nav_privacy" />
+                <item
+                    android:id="@+id/item32"
+                    android:icon="@drawable/description_48px"
+                    android:title="@string/nav_terms" />
+            </menu>
+        </item>
+    </group>
+</menu>

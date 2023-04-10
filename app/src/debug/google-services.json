@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "390453532209",
+    "project_id": "cuenca-movil-22b63",
+    "storage_bucket": "cuenca-movil-22b63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390453532209:android:6b96d042420ec0fb03a710",
+        "android_client_info": {
+          "package_name": "edu.virginiaojeda.cuencamovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390453532209-1bs6ofre2h0bpjlan2g899d1gfgs601j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.virginiaojeda.cuencamovil",
+            "certificate_hash": "27c6e226326b1e20e17ac1d3edcc3ebabf7abdc4"
+          }
+        },
+        {
+          "client_id": "390453532209-n1coif22i7g7hqiam0q1s6gcbi74oilt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB-7hXgPSCHlpbzymjnl44p4ZwXAEM1wg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390453532209-n1coif22i7g7hqiam0q1s6gcbi74oilt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
