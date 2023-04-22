@@ -159,4 +159,16 @@ class MainActivity : AppCompatActivity() {
         }
         transaction.commit()
     }
+
+    fun showMapFragment(){
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                RequestFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
+    }
 }

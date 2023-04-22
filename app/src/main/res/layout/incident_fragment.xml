@@ -52,21 +52,19 @@
 
             <Spinner
                 android:id="@+id/sp_categories"
-                style="@android:style/Widget.Material.Spinner.Underlined"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:backgroundTint="#000"
+                android:dropDownItemStyle="@style/SpinnerDropDownItemStyle"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_cvCategory"
-                android:spinnerMode="dropdown"
-                android:backgroundTint="#000"
-                android:gravity="center"
-                android:foregroundTint="#000"
-                ></Spinner>
-
-
+                tools:ignore="SpeakableTextPresentCheck"></Spinner>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -96,15 +94,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/et_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:backgroundTint="#000"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
+                android:hint="@string/et_description"
+                android:inputType="textMultiLine"
+                android:maxLines="4"
                 android:textColor="#000"
+                android:textColorHint="#272424"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +138,15 @@
                 android:textColor="#000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_container"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_cvMap"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

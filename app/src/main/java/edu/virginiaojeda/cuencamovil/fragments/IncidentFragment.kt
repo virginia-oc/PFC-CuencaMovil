@@ -17,6 +17,7 @@ class IncidentFragment : Fragment() {
     lateinit var binding : IncidentFragmentBinding
     private lateinit var contextFrag :Context
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         contextFrag = context
@@ -49,11 +50,11 @@ class IncidentFragment : Fragment() {
         )
 
         binding.spCategories.adapter = adapter
+        binding.spCategories.setSelection(0)
     }
 
     override fun onStart() {
         super.onStart()
-        binding.spCategories.setSelection(0)
         binding.spCategories.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -63,13 +64,8 @@ class IncidentFragment : Fragment() {
                     id: Long
                 ) {
                     if (position > 0){
-                        Toast.makeText(
-                            contextFrag,
-                            "pues el spinner",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        binding.spCategories.setSelection(position)
                     }
-                    binding.spCategories.setSelection(0)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -86,6 +82,8 @@ class IncidentFragment : Fragment() {
                 }
             }
     }
+
+
 
     override fun onResume() {
         super.onResume()

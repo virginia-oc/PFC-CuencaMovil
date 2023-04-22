@@ -22,9 +22,10 @@
     <string name="tv_tituloCardviewHistory">Mis solicitudes</string>
     <string name="tv_titleCardViewIncident">Escribe una descripción breve del problema:</string>
     <string name="tv_titleReportFragment">Reportar una incidencia</string>
-    <string name="tv_cvCategory">Selecciona la categoría a la que pertenece la incidencia:</string>
-    <string name="tv_cvMap">¿Cuál es la ubicación de la incidencia?</string>
+    <string name="tv_cvCategory">¿A qué categoría pertenece?</string>
+    <string name="tv_cvMap">¿Dónde está ubicado?</string>
     <string name="tv_cvPhoto">Alguna foto nos ayudaría a identificar el problema:</string>
+    <string name="et_description">Descripción...</string>
     <string-array name="sp_categories">
         <item>Selecciona una categoría...</item>
         <item>Alumbrado público</item>
