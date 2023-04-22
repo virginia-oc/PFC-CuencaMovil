@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import edu.virginiaojeda.cuencamovil.databinding.ActivityMainBinding
 import edu.virginiaojeda.cuencamovil.fragments.FAQFragment
 import edu.virginiaojeda.cuencamovil.fragments.HomeFragment
 import edu.virginiaojeda.cuencamovil.fragments.IncidentFragment
 import edu.virginiaojeda.cuencamovil.fragments.RequestFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -160,15 +166,12 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun showMapFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                RequestFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
+    override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(LatLng(0.0, 0.0))
+                .title("Marker")
+        )
     }
+
 }
