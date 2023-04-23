@@ -26,6 +26,9 @@
     <string name="tv_cvMap">¿Dónde está ubicado?</string>
     <string name="tv_cvPhoto">Alguna foto nos ayudaría a identificar el problema:</string>
     <string name="et_description">Descripción...</string>
+    <string name="info_picture_canceled">Foto cancelada</string>
+    <string name="image_width">200</string>
+    <string name="image_height">200</string>
     <string-array name="sp_categories">
         <item>Selecciona una categoría...</item>
         <item>Alumbrado público</item>
