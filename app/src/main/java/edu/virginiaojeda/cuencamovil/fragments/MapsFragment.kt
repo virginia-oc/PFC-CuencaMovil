@@ -1,3 +1,8 @@
+//
+//De momento este fragment no se usa para nada. Se podria borrar.
+//Si no lo he borrado aun es porque quizas lo use para que cuando se pulse el minimapa salga
+//otro mapa que ocupe la pantalla entera, y sea este fragment el que gestione eso.
+
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.content.Context
@@ -48,13 +53,5 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-    }
-
-    fun onMapReady(googleMap: GoogleMap) {
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(LatLng(0.0, 0.0))
-                .title("Marker")
-        )
     }
 }

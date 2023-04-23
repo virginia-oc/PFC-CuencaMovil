@@ -1,9 +1,11 @@
 package edu.virginiaojeda.cuencamovil
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,9 +18,10 @@ import edu.virginiaojeda.cuencamovil.fragments.HomeFragment
 import edu.virginiaojeda.cuencamovil.fragments.IncidentFragment
 import edu.virginiaojeda.cuencamovil.fragments.RequestFragment
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var activity = this
 
     private val myBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -146,7 +149,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
                 binding.fragmentContainer.id,
-                IncidentFragment()
+                IncidentFragment(activity)
             )
             // Permite la vuelta "atrás".
             addToBackStack(null)
@@ -165,13 +168,4 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         transaction.commit()
     }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(LatLng(0.0, 0.0))
-                .title("Marker")
-        )
-    }
-
 }
