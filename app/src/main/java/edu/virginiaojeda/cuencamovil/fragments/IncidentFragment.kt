@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.location.Location
+import android.support.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -20,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.graphics.rotationMatrix
 import androidx.core.view.marginRight
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -34,6 +36,7 @@ import edu.virginiaojeda.cuencamovil.R
 import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
 import edu.virginiaojeda.cuencamovil.utils.ManageFiles
 import java.io.File
+import java.io.IOException
 import java.util.*
 
 class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
@@ -113,18 +116,19 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
                     images.add(photoFile!!)
                     photoFile = null
 
-                    for (image in images) {
-                        val imageView = ImageView(contextFrag)
-                        val bitmap = BitmapFactory.decodeFile(image.path)
-                        imageView.setImageBitmap(bitmap)
-                        imageView.layoutParams = LinearLayout.LayoutParams(
-                            resources.getString(R.string.image_width).toInt(),
-                            resources.getString(R.string.image_height).toInt()
-                        ).apply {
-                            rightMargin = 20
-                        }
-                        binding.imagesLinearLayout.addView(imageView)
+                    val imageView = ImageView(contextFrag)
+                    val bitmap = BitmapFactory.decodeFile(images[images.size - 1].path)
+                    imageView.setImageBitmap(bitmap)
+                    imageView.rotation = 90.0f
+                    imageView.layoutParams = LinearLayout.LayoutParams(
+                        resources.getString(R.string.image_width).toInt(),
+                        resources.getString(R.string.image_height).toInt()
+                    ).apply {
+//                            rightMargin =
                     }
+                    if (isImagePortrait(images[images.size - 1]))
+                        imageView.rotation = 90.0f
+                    binding.imagesLinearLayout.addView(imageView)
                 } else {
                     Toast.makeText(
                         contextFrag,
@@ -135,9 +139,20 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
             }
 
         binding.btnCamera.setOnClickListener(){
-
             startCamera(resultTakePicture)
         }
+    }
+
+    private fun isImagePortrait(image : File) : Boolean{
+        try {
+            val exif = ExifInterface(image.absolutePath)
+            val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+            return orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
+        } catch (e: IOException) {
+            // Manejar la excepción si ocurre algún error al leer el archivo de imagen
+            e.printStackTrace()
+        }
+        return false
     }
 
     override fun onStart() {
