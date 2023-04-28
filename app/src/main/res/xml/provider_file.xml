@@ -3,4 +3,6 @@
     <external-files-path
         name="images"
         path="Pictures" />
+
+    <external-path name="external_files" path="." />
 </paths>

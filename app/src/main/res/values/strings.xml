@@ -20,15 +20,16 @@
     <string name="tv_tituloCardviewAssociations">Asociaciones culturales</string>
     <string name="btn_cardviewHome">Ver más</string>
     <string name="tv_tituloCardviewHistory">Mis solicitudes</string>
-    <string name="tv_titleCardViewIncident">Escribe una descripción breve del problema:</string>
-    <string name="tv_titleReportFragment">Reportar una incidencia</string>
-    <string name="tv_cvCategory">¿A qué categoría pertenece?</string>
+    <string name="tv_titleCardViewIncident">Escribe una descripción breve del problema*:</string>
+    <string name="tv_titleReportFragment">Crear reporte</string>
+    <string name="tv_cvCategory">¿A qué categoría pertenece?*</string>
     <string name="tv_cvMap">¿Dónde está ubicado?</string>
     <string name="tv_cvPhoto">Alguna foto nos ayudaría a identificar el problema:</string>
     <string name="et_description">Descripción...</string>
     <string name="info_picture_canceled">Foto cancelada</string>
     <string name="image_width">200</string>
     <string name="image_height">100</string>
+    <string name="btn_sendReport">Enviar reporte</string>
     <string-array name="status">
         <item>Enviado</item>
         <item>Admitido</item>

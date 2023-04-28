@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -34,9 +35,11 @@ import com.google.android.gms.maps.model.LatLng
 import edu.virginiaojeda.cuencamovil.MainActivity
 import edu.virginiaojeda.cuencamovil.R
 import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
+import edu.virginiaojeda.cuencamovil.model.Report
 import edu.virginiaojeda.cuencamovil.utils.ManageFiles
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
@@ -107,8 +110,6 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
         //Iniciar la cámara:
-
-
         var resultTakePicture =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
@@ -141,6 +142,36 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
         binding.btnCamera.setOnClickListener(){
             startCamera(resultTakePicture)
         }
+
+        binding.btnSendReport.setOnClickListener() {
+            validateCategory()
+            validateDescription()
+            validateLocation()
+
+            val calendar = Calendar.getInstance()
+            val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+            val dateTime = dateTimeFormat.format(calendar.time)
+            Log.e("report", "Fecha y hora actual: $dateTime")
+            //Creamos el reporte con Id = 0 porque luego será sobreescrito por el Id asignado por la bbdd:
+//            val report = Report(0, Calendar.getInstance(), binding.spCategories.selectedItem.toString(),
+//            )
+            //este botón crea el objeto de la clase Report y lo guarda en la base de datos.
+        }
+    }
+
+    private fun validateCategory() {
+        if (binding.spCategories.selectedItem.toString() ==
+            resources.getStringArray(R.array.sp_categories)[0]) {
+
+        }
+    }
+
+    private fun validateDescription() {
+        //TODO
+    }
+
+    private fun validateLocation() {
+        //TODO
     }
 
     private fun isImagePortrait(image : File) : Boolean{
@@ -277,6 +308,4 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
             }
         }
     }
-
-
 }
