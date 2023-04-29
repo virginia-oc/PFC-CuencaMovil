@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng
 import edu.virginiaojeda.cuencamovil.MainActivity
 import edu.virginiaojeda.cuencamovil.R
 import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
+import edu.virginiaojeda.cuencamovil.model.Report
 import edu.virginiaojeda.cuencamovil.utils.ManageDatabase
 import edu.virginiaojeda.cuencamovil.utils.ManageFiles
 import edu.virginiaojeda.cuencamovil.utils.ValidateFields
@@ -49,8 +50,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
     private val isIncident = isIncident
 
     private var photoFile: File? = null
-    private var photoFileList = mutableListOf<File>()
-    private val images: MutableList<File> = ArrayList()
+    private val photoFileList: MutableList<File> = ArrayList()
     private val permissionIdCamera = 2
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -112,12 +112,11 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    images.add(photoFile!!)
                     photoFileList.add(photoFile!!)
                     photoFile = null
 
                     val imageView = ImageView(contextFrag)
-                    val bitmap = BitmapFactory.decodeFile(images[images.size - 1].path)
+                    val bitmap = BitmapFactory.decodeFile(photoFileList[photoFileList.size - 1].path)
                     imageView.setImageBitmap(bitmap)
                     imageView.rotation = 90.0f
                     imageView.layoutParams = LinearLayout.LayoutParams(
@@ -126,7 +125,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
                     ).apply {
 //                            rightMargin =
                     }
-                    if (isImagePortrait(images[images.size - 1]))
+                    if (isImagePortrait(photoFileList[photoFileList.size - 1]))
                         imageView.rotation = 90.0f
                     binding.imagesLinearLayout.addView(imageView)
                 } else {
@@ -198,19 +197,18 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             validateFields.validateLocation()
             val dateTime = validateFields.createDateTime()
 
-//            val dataReport = Report(
-//                0,
-//                dateTime,
-//                currentLatLng.latitude,
-//                currentLatLng.longitude,
-//                binding.spCategories.selectedItem.toString(),
-//                binding.etDescription.text.toString(),
-//                isIncident,
-//                Gestionar aqui lo de las fotos,
-//                Gestionar aqui los status
-//            )
-//            val manageDatabase = ManageDatabase()
-//            manageDatabase.addData(dataReport)
+
+            val dataReport = Report(
+                0,
+                dateTime,
+                currentLatLng.latitude,
+                currentLatLng.longitude,
+                binding.spCategories.selectedItem.toString(),
+                binding.etDescription.text.toString(),
+                isIncident,
+                manageDatabase.getURLPhotoList()
+            )
+            manageDatabase.addData(dataReport)
         }
     }
 

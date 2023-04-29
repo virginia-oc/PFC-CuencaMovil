@@ -16,6 +16,8 @@ class ManageDatabase {
     val collection: CollectionReference = db.collection("profesores")
     val collectionName = "reports"
     lateinit var storage: FirebaseStorage
+    var urlFirebase = "gs://cuenca-movil-22b63.appspot.com"
+    var urlPhotosList = mutableListOf<String>()
 
     fun addData(dataReport: Report) {
         // Create a new user with a first and last name
@@ -27,7 +29,7 @@ class ManageDatabase {
             "lat" to dataReport.latitude,
             "long" to dataReport.longitude,
             "status" to dataReport.status,
-            "photo" to dataReport.photo,
+            "photo" to dataReport.photoURLs,
         )
 
         // Add a new document with a generated ID
@@ -43,13 +45,15 @@ class ManageDatabase {
 
     fun savePhotoToFirebaseStorage(photoFileList: MutableList<File>){
         // Create a storage reference from our app
-        storage = Firebase.storage("gs://cuenca-movil-22b63.appspot.com")
+        storage = Firebase.storage(urlFirebase)
         val storageRef = storage.reference
 
         for (photoFile in photoFileList){
             var file = Uri.fromFile(photoFile)
             val reportRef = storageRef.child("images/${file.lastPathSegment}")
             val uploadTask = reportRef.putFile(file)
+
+            urlPhotosList.add(urlFirebase + "images/${file.lastPathSegment}")
 
             // Register observers to listen for when the download is done or if it fails
             uploadTask.addOnFailureListener {
@@ -59,5 +63,9 @@ class ManageDatabase {
                 // ...
             }
         }
+    }
+
+    fun getURLPhotoList() : MutableList<String>{
+        return urlPhotosList
     }
 }

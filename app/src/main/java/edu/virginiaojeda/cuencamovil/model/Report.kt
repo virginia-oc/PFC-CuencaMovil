@@ -15,7 +15,7 @@ class Report(
     var category : String,
     var description : String,
     var isIncident : Boolean,
-    var photo : ByteArray,
+    var photoURLs : MutableList<String>,
     var status : Status
 ) {
     constructor(id: Int,
@@ -24,6 +24,16 @@ class Report(
                 longitude: Double,
                 category: String,
                 description: String,
-                incident: Boolean) : this(id, dateTime, latitude, longitude, category, description, incident,
-                                        ByteArray(10) { 0 }, Status.SENT)
+                isIncident: Boolean) : this(id, dateTime, latitude, longitude, category,
+                                            description, isIncident, mutableListOf(), Status.SENT)
+
+    constructor(id: Int,
+                dateTime: String,
+                latitude: Double,
+                longitude: Double,
+                category: String,
+                description: String,
+                isIncident: Boolean,
+                photoURLs: MutableList<String>) : this(id, dateTime, latitude, longitude, category,
+                                                    description, isIncident, photoURLs, Status.SENT)
 }

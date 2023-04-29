@@ -30,6 +30,7 @@
     <string name="image_width">200</string>
     <string name="image_height">100</string>
     <string name="btn_sendReport">Enviar reporte</string>
+    <string name="url_firebaseStorage">gs://cuenca-movil-22b63.appspot.com</string>
     <string-array name="status">
         <item>Enviado</item>
         <item>Admitido</item>
