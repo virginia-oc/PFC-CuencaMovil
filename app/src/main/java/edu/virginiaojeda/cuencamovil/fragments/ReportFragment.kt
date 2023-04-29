@@ -160,6 +160,12 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
 
     override fun onStart() {
         super.onStart()
+
+        setSpinnerCategoriesListener()
+        setButtonSendReportListener()
+    }
+
+    private fun setSpinnerCategoriesListener(){
         binding.spCategories.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -186,7 +192,9 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
                     TODO("Not yet implemented")
                 }
             }
+    }
 
+    private fun setButtonSendReportListener(){
         binding.btnSendReport.setOnClickListener() {
             val manageDatabase = ManageDatabase()
             manageDatabase.savePhotoToFirebaseStorage(photoFileList)
@@ -196,7 +204,6 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             validateFields.validateDescription()
             validateFields.validateLocation()
             val dateTime = validateFields.createDateTime()
-
 
             val dataReport = Report(
                 0,
