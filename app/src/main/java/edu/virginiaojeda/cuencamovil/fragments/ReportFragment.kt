@@ -7,8 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.location.Location
-import android.support.media.ExifInterface
-import android.net.Uri
+import androidx.exifinterface.media.ExifInterface
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -18,12 +17,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.TooltipCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.graphics.rotationMatrix
-import androidx.core.view.marginRight
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -35,14 +31,14 @@ import com.google.android.gms.maps.model.LatLng
 import edu.virginiaojeda.cuencamovil.MainActivity
 import edu.virginiaojeda.cuencamovil.R
 import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
-import edu.virginiaojeda.cuencamovil.model.Report
+import edu.virginiaojeda.cuencamovil.utils.ManageDatabase
 import edu.virginiaojeda.cuencamovil.utils.ManageFiles
+import edu.virginiaojeda.cuencamovil.utils.ValidateFields
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 
-class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
+class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnMapReadyCallback {
     lateinit var binding : IncidentFragmentBinding
     private lateinit var contextFrag :Context
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -50,8 +46,10 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var activity = activity
     private lateinit var currentLatLng : LatLng
+    private val isIncident = isIncident
 
     private var photoFile: File? = null
+    private var photoFileList = mutableListOf<File>()
     private val images: MutableList<File> = ArrayList()
     private val permissionIdCamera = 2
 
@@ -115,6 +113,7 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
             { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     images.add(photoFile!!)
+                    photoFileList.add(photoFile!!)
                     photoFile = null
 
                     val imageView = ImageView(contextFrag)
@@ -142,43 +141,17 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
         binding.btnCamera.setOnClickListener(){
             startCamera(resultTakePicture)
         }
-
-        binding.btnSendReport.setOnClickListener() {
-            validateCategory()
-            validateDescription()
-            validateLocation()
-
-            val calendar = Calendar.getInstance()
-            val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-            val dateTime = dateTimeFormat.format(calendar.time)
-            Log.e("report", "Fecha y hora actual: $dateTime")
-            //Creamos el reporte con Id = 0 porque luego será sobreescrito por el Id asignado por la bbdd:
-//            val report = Report(0, Calendar.getInstance(), binding.spCategories.selectedItem.toString(),
-//            )
-            //este botón crea el objeto de la clase Report y lo guarda en la base de datos.
-        }
     }
 
-    private fun validateCategory() {
-        if (binding.spCategories.selectedItem.toString() ==
-            resources.getStringArray(R.array.sp_categories)[0]) {
-
-        }
-    }
-
-    private fun validateDescription() {
-        //TODO
-    }
-
-    private fun validateLocation() {
-        //TODO
-    }
 
     private fun isImagePortrait(image : File) : Boolean{
         try {
-            val exif = ExifInterface(image.absolutePath)
-            val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-            return orientation == ExifInterface.ORIENTATION_ROTATE_90 || orientation == ExifInterface.ORIENTATION_ROTATE_270
+            val exif =
+                ExifInterface(image.absolutePath)
+            val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL)
+            return orientation == ExifInterface.ORIENTATION_ROTATE_90 ||
+                    orientation == ExifInterface.ORIENTATION_ROTATE_270
         } catch (e: IOException) {
             // Manejar la excepción si ocurre algún error al leer el archivo de imagen
             e.printStackTrace()
@@ -214,11 +187,35 @@ class IncidentFragment (activity: Activity): Fragment(), OnMapReadyCallback {
                     TODO("Not yet implemented")
                 }
             }
+
+        binding.btnSendReport.setOnClickListener() {
+            val manageDatabase = ManageDatabase()
+            manageDatabase.savePhotoToFirebaseStorage(photoFileList)
+
+            val validateFields = ValidateFields(binding, contextFrag)
+            validateFields.validateCategory()
+            validateFields.validateDescription()
+            validateFields.validateLocation()
+            val dateTime = validateFields.createDateTime()
+
+//            val dataReport = Report(
+//                0,
+//                dateTime,
+//                currentLatLng.latitude,
+//                currentLatLng.longitude,
+//                binding.spCategories.selectedItem.toString(),
+//                binding.etDescription.text.toString(),
+//                isIncident,
+//                Gestionar aqui lo de las fotos,
+//                Gestionar aqui los status
+//            )
+//            val manageDatabase = ManageDatabase()
+//            manageDatabase.addData(dataReport)
+        }
     }
 
     //Funciones de la camara:
     private fun startCamera(resultTakePicture : ActivityResultLauncher<Intent>){
-
         if (checkPermissionsCamera()){
             photoFile = ManageFiles().createImageFile(contextFrag)
             val fileProvider =

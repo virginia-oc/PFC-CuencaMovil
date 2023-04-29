@@ -37,11 +37,11 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnNotifyIncident.setOnClickListener(){
-            (activity as MainActivity).showNotifyIncidentFragment()
+            (activity as MainActivity).showReportFragment(true)
         }
 
         binding.btnMakeRequest.setOnClickListener(){
-            (activity as MainActivity).showMakeRequestFragment()
+            (activity as MainActivity).showReportFragment(false)
         }
     }
 

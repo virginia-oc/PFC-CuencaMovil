@@ -1,8 +1,5 @@
 package edu.virginiaojeda.cuencamovil.model
 
-import com.google.type.DateTime
-import edu.virginiaojeda.cuencamovil.R
-
 enum class Status {
     SENT,
     ACCEPTED,
@@ -12,19 +9,21 @@ enum class Status {
 
 class Report(
     var id : Int,
-    var date: DateTime,
-    var location : FloatArray,
+    var dateTime: String,
+    var latitude : Double,
+    var longitude: Double,
     var category : String,
     var description : String,
-    var incident : Boolean,
+    var isIncident : Boolean,
     var photo : ByteArray,
     var status : Status
 ) {
     constructor(id: Int,
-                date: DateTime,
-                location: FloatArray,
+                dateTime: String,
+                latitude: Double,
+                longitude: Double,
                 category: String,
                 description: String,
-                incident: Boolean) : this(id, date, location, category, description, incident,
+                incident: Boolean) : this(id, dateTime, latitude, longitude, category, description, incident,
                                         ByteArray(10) { 0 }, Status.SENT)
 }
