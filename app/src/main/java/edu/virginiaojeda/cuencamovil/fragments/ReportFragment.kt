@@ -206,7 +206,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             val dateTime = validateFields.createDateTime()
 
             val dataReport = Report(
-                0,
+                "0",
                 dateTime,
                 currentLatLng.latitude,
                 currentLatLng.longitude,

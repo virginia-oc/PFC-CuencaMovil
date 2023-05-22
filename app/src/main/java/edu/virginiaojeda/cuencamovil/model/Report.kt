@@ -1,14 +1,14 @@
 package edu.virginiaojeda.cuencamovil.model
 
 enum class Status {
-    SENT,
-    ACCEPTED,
-    REJECTED,
-    FINISHED
+    Enviado,
+    Aceptado,
+    Rechazado,
+    Finalizado
 }
 
 class Report(
-    var id : Int,
+    var id : String,
     var dateTime: String,
     var latitude : Double,
     var longitude: Double,
@@ -18,16 +18,16 @@ class Report(
     var photoURLs : MutableList<String>,
     var status : Status
 ) {
-    constructor(id: Int,
+    constructor(id: String,
                 dateTime: String,
                 latitude: Double,
                 longitude: Double,
                 category: String,
                 description: String,
                 isIncident: Boolean) : this(id, dateTime, latitude, longitude, category,
-                                            description, isIncident, mutableListOf(), Status.SENT)
+                                            description, isIncident, mutableListOf(), Status.Enviado)
 
-    constructor(id: Int,
+    constructor(id: String,
                 dateTime: String,
                 latitude: Double,
                 longitude: Double,
@@ -35,5 +35,5 @@ class Report(
                 description: String,
                 isIncident: Boolean,
                 photoURLs: MutableList<String>) : this(id, dateTime, latitude, longitude, category,
-                                                    description, isIncident, photoURLs, Status.SENT)
+                                                    description, isIncident, photoURLs, Status.Enviado)
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,7 +13,8 @@
         android:layout_marginEnd="24dp"
         android:text="@string/header_navigationbar"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="?attr/colorOnSurface"/>
+        android:textColor="@color/primaryTextColor"/>
+    <!--        android:textColor="?attr/colorOnSurface"/>-->
 
 
 </LinearLayout>

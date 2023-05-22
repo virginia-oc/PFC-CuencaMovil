@@ -12,9 +12,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 class ManageDatabase {
-    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    val collection: CollectionReference = db.collection("profesores")
-    val collectionName = "reports"
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val collectionName = "reports"
     lateinit var storage: FirebaseStorage
     var urlFirebase = "gs://cuenca-movil-22b63.appspot.com"
     var pathPhotosFirebaseList = mutableListOf<String>()
@@ -25,11 +24,11 @@ class ManageDatabase {
             "category" to dataReport.category,
             "dateTime" to dataReport.dateTime,
             "description" to dataReport.description,
-            "incident" to dataReport.isIncident,
-            "lat" to dataReport.latitude,
-            "long" to dataReport.longitude,
+            "isIncident" to dataReport.isIncident,
+            "latitude" to dataReport.latitude,
+            "longitude" to dataReport.longitude,
             "status" to dataReport.status,
-            "photo" to dataReport.photoURLs,
+            "photoURLs" to dataReport.photoURLs,
         )
 
         // Add a new document with a generated ID
@@ -67,5 +66,61 @@ class ManageDatabase {
 
     fun getURLPhotoList() : MutableList<String>{
         return pathPhotosFirebaseList
+    }
+
+    fun getIncidents(){
+        db.collection(collectionName)
+            .whereEqualTo("incident", true)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getRequests(){
+        db.collection(collectionName)
+            .whereEqualTo("incident", false)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getReportsByUser(user : String){
+        //en id podría poner el email del usuario registrado
+        db.collection(collectionName)
+            .whereEqualTo("id", "")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getAllReports(){
+        db.collection(collectionName)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
     }
 }
