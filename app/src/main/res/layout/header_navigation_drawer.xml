@@ -14,7 +14,5 @@
         android:text="@string/header_navigationbar"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/primaryTextColor"/>
-    <!--        android:textColor="?attr/colorOnSurface"/>-->
-
 
 </LinearLayout>

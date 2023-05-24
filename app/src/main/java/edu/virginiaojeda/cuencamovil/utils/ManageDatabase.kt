@@ -19,7 +19,6 @@ class ManageDatabase {
     var pathPhotosFirebaseList = mutableListOf<String>()
 
     fun addData(dataReport: Report) {
-        // Create a new user with a first and last name
         val report = hashMapOf(
             "category" to dataReport.category,
             "dateTime" to dataReport.dateTime,
