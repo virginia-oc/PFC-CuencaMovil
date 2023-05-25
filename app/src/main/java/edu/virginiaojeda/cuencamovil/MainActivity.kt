@@ -2,12 +2,14 @@ package edu.virginiaojeda.cuencamovil
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import edu.virginiaojeda.cuencamovil.databinding.ActivityMainBinding
 import edu.virginiaojeda.cuencamovil.fragments.FAQFragment
 import edu.virginiaojeda.cuencamovil.fragments.HomeFragment
 import edu.virginiaojeda.cuencamovil.fragments.ReportFragment
+import edu.virginiaojeda.cuencamovil.fragments.ReportsListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -141,6 +143,18 @@ class MainActivity : AppCompatActivity() {
             replace(
                 binding.fragmentContainer.id,
                 ReportFragment(activity, isIncident)
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
+    }
+
+    fun showReportsListFragment(){
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                ReportsListFragment()
             )
             // Permite la vuelta "atrás".
             addToBackStack(null)

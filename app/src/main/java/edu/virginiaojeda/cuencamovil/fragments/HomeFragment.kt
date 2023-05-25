@@ -43,6 +43,10 @@ class HomeFragment : Fragment(){
         binding.btnMakeRequest.setOnClickListener(){
             (activity as MainActivity).showReportFragment(false)
         }
+
+        binding.btnAllReports.setOnClickListener(){
+            (activity as MainActivity).showReportsListFragment()
+        }
     }
 
     override fun onStart() {

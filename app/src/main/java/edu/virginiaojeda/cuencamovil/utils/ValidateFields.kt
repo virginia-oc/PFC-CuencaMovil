@@ -2,11 +2,12 @@ package edu.virginiaojeda.cuencamovil.utils
 
 import android.content.Context
 import edu.virginiaojeda.cuencamovil.R
-import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
+import edu.virginiaojeda.cuencamovil.databinding.ReportFragmentBinding
+
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ValidateFields(val binding: IncidentFragmentBinding, val context: Context) {
+class ValidateFields(val binding: ReportFragmentBinding, val context: Context) {
     val resources = context.resources
 
     fun validateCategory() {

@@ -30,17 +30,17 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import edu.virginiaojeda.cuencamovil.MainActivity
 import edu.virginiaojeda.cuencamovil.R
-import edu.virginiaojeda.cuencamovil.databinding.IncidentFragmentBinding
-import edu.virginiaojeda.cuencamovil.model.Report
-import edu.virginiaojeda.cuencamovil.utils.ManageDatabase
-import edu.virginiaojeda.cuencamovil.utils.ManageFiles
+import edu.virginiaojeda.cuencamovil.databinding.ReportFragmentBinding
+import edu.virginiaojeda.cuencamovil.model.ReportFirebase
+import edu.virginiaojeda.cuencamovil.utils.DatabaseManager
+import edu.virginiaojeda.cuencamovil.utils.FilesManager
 import edu.virginiaojeda.cuencamovil.utils.ValidateFields
 import java.io.File
 import java.io.IOException
 import java.util.*
 
 class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnMapReadyCallback {
-    lateinit var binding : IncidentFragmentBinding
+    lateinit var binding : ReportFragmentBinding
     private lateinit var contextFrag :Context
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
@@ -77,7 +77,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = IncidentFragmentBinding.inflate(layoutInflater)
+        binding = ReportFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -196,8 +196,8 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
 
     private fun setButtonSendReportListener(){
         binding.btnSendReport.setOnClickListener() {
-            val manageDatabase = ManageDatabase()
-            manageDatabase.savePhotoToFirebaseStorage(photoFileList)
+            val databaseManager = DatabaseManager()
+            databaseManager.savePhotoToFirebaseStorage(photoFileList)
 
             val validateFields = ValidateFields(binding, contextFrag)
             validateFields.validateCategory()
@@ -205,24 +205,23 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             validateFields.validateLocation()
             val dateTime = validateFields.createDateTime()
 
-            val dataReport = Report(
-                "0",
+            val dataReport = ReportFirebase(
                 dateTime,
                 currentLatLng.latitude,
                 currentLatLng.longitude,
                 binding.spCategories.selectedItem.toString(),
                 binding.etDescription.text.toString(),
                 isIncident,
-                manageDatabase.getURLPhotoList()
+                databaseManager.getURLPhotoList()
             )
-            manageDatabase.addData(dataReport)
+            databaseManager.addData(dataReport)
         }
     }
 
     //Funciones de la camara:
     private fun startCamera(resultTakePicture : ActivityResultLauncher<Intent>){
         if (checkPermissionsCamera()){
-            photoFile = ManageFiles().createImageFile(contextFrag)
+            photoFile = FilesManager().createImageFile(contextFrag)
             val fileProvider =
                 FileProvider.getUriForFile( // En base al provider creado en el Manifest.
                     contextFrag,

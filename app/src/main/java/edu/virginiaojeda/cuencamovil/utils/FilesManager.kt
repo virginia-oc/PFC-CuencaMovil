@@ -6,7 +6,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ManageFiles {
+class FilesManager {
     /**
      * Este método devuelve el directorio donde se guardará la imagen
      * @param context

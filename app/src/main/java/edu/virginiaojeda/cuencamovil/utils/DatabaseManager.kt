@@ -2,23 +2,26 @@ package edu.virginiaojeda.cuencamovil.utils
 
 import android.content.ContentValues.TAG
 import android.net.Uri
+import android.os.Debug
 import android.util.Log
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import edu.virginiaojeda.cuencamovil.model.Report
 import java.io.File
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import edu.virginiaojeda.cuencamovil.model.ReportFirebase
+import kotlinx.coroutines.tasks.await
 
-class ManageDatabase {
+class DatabaseManager {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val collectionName = "reports"
     lateinit var storage: FirebaseStorage
     var urlFirebase = "gs://cuenca-movil-22b63.appspot.com"
     var pathPhotosFirebaseList = mutableListOf<String>()
 
-    fun addData(dataReport: Report) {
+    fun addData(dataReport: ReportFirebase) {
         val report = hashMapOf(
             "category" to dataReport.category,
             "dateTime" to dataReport.dateTime,
@@ -110,16 +113,40 @@ class ManageDatabase {
             }
     }
 
-    fun getAllReports(){
-        db.collection(collectionName)
+    /**
+     * Get all reports of the database which status fields is equal to "Aceptado"
+     *@return A list with all the accepted reports
+     */
+    suspend fun getAllReports() : MutableList<Report>{
+        var reportList : MutableList<Report> = mutableListOf()
+        db.collection(collectionName).whereEqualTo("status", "Aceptado")
             .get()
-            .addOnSuccessListener { result ->
+            .apply {
+                addOnSuccessListener { result ->
                 for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
+//                    Log.d(TAG, "${document.id} => ${document.data}")
+                    val reportFirebase = document.toObject<ReportFirebase>()
+                    val report = Report(
+                        document.id,
+                        reportFirebase.dateTime,
+                        reportFirebase.latitude,
+                        reportFirebase.longitude,
+                        reportFirebase.category,
+                        reportFirebase.description,
+                        reportFirebase.isIncident,
+                        reportFirebase.photoURLs,
+                        reportFirebase.status
+                    )
+                    reportList.add(report)
+                    Log.e("database", report.toString())
+//                    Log.e("database", reportFirebase.toString())
                 }
+            }
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
-            }
+            }.await()
+        Log.e("database", reportList.size.toString())
+        return reportList
     }
 }
