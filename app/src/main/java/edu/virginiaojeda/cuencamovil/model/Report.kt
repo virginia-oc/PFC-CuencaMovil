@@ -1,7 +1,9 @@
+/**
+ * Clase de tipo data que contiene los constructores secundarios para crear objetos de tipo Report
+ * y el método sobreescrito toString()
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.model
-
-import androidx.core.graphics.component1
-import edu.virginiaojeda.cuencamovil.R
 
 data class Report(
     var id : String,

@@ -1,3 +1,9 @@
+/**
+ * Clase de tipo data que contiene los constructores secundarios para crear objetos de tipo
+ * ReportFirebase y el método sobreescrito toString(). Los objetos de esta clase solo se usan para
+ * volcar los datos de la base de datos antes de clonarlos en objetos de la clase Report
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.model
 
 data class ReportFirebase(
@@ -33,5 +39,4 @@ data class ReportFirebase(
     override fun toString(): String {
         return this.category + " --- " + this.description
     }
-
 }

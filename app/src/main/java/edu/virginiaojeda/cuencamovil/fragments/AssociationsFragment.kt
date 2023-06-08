@@ -1,3 +1,7 @@
+/**
+ * Fragment que contiene los métodos que muestra la pantalla de asociaciones
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.content.Context

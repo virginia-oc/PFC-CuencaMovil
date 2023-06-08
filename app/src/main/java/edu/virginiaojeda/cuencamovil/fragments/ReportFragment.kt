@@ -1,3 +1,8 @@
+/**
+ * Fragment que contiene los métodos que crean los eventos de cada botón de la pantalla de reporte
+ * y los métodos para garantizar los permisos de cámara y mapas.
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.Manifest.permission.CAMERA
@@ -81,6 +86,12 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         return binding.root
     }
 
+    /**
+     * Crea los métodos de click de los elementos de la pantalla de notificar un reporte, muestra
+     * el fragment del mapa en su contenedor e inicia el intent para la cámara
+     * @param view
+     * @param savedInstanceState
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -122,9 +133,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
                     imageView.layoutParams = LinearLayout.LayoutParams(
                         resources.getString(R.string.image_width).toInt(),
                         resources.getString(R.string.image_height).toInt()
-                    ).apply {
-//                            rightMargin =
-                    }
+                    )
                     if (isImagePortrait(photoFileList[photoFileList.size - 1]))
                         imageView.rotation = 90.0f
                     binding.imagesLinearLayout.addView(imageView)
@@ -142,7 +151,13 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         }
     }
 
-
+    /**
+     * Método que dado un elemento imagen de tipo File devuelve 'true' si la imagen está tomada
+     * en vertical y 'false' si es horizontal
+     * @param image Variable de tipo File que contiene la foto de la cual queremos saber su
+     * orientación
+     * @return Valor booleano que indica si la imagen está en vertical (true) u horizontal (false)
+     */
     private fun isImagePortrait(image : File) : Boolean{
         try {
             val exif =
@@ -158,13 +173,19 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         return false
     }
 
+    /**
+     * Llama a los métodos que se encargan de configurar los listeners de eventos para el spinner
+     * de categorías y para el botón de enviar reporte.
+     */
     override fun onStart() {
         super.onStart()
-
         setSpinnerCategoriesListener()
         setButtonSendReportListener()
     }
 
+    /**
+     * Método que crea y rellena el Spinner para elegir las diferentes categorías
+     */
     private fun setSpinnerCategoriesListener(){
         binding.spCategories.onItemSelectedListener =
             object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
@@ -194,6 +215,12 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             }
     }
 
+    /**
+     * Método que crea el evento para el botón de enviar reporte, llama a las funciones que
+     * validan los datos del formulario y llama al método que guarda el reporte en la base de datos
+     * @see DatabaseManager
+     * @see ValidateFields
+     */
     private fun setButtonSendReportListener(){
         binding.btnSendReport.setOnClickListener() {
             val databaseManager = DatabaseManager()
@@ -218,7 +245,12 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         }
     }
 
-    //Funciones de la camara:
+    /**
+     * Inicia la cámara para capturar una imagen, verifica los permisos necesarios y gestiona
+     * el resultado de la actividad de la cámara
+     * @param resultTakePicture Objeto de tipo ActivityResultLauncher utilizado para manejar el
+     * resultado de la cámara
+     */
     private fun startCamera(resultTakePicture : ActivityResultLauncher<Intent>){
         if (checkPermissionsCamera()){
             photoFile = FilesManager().createImageFile(contextFrag)
@@ -259,6 +291,7 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
 
     /**
      * Método que solicita al usuario conceder los permisos de cámara a la aplicación
+     * @see MainActivity
      */
     private fun requestPermissionsCamera() {
         ActivityCompat.requestPermissions(
@@ -270,8 +303,12 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         )
     }
 
-
-    //Funciones del mapa:
+    /**
+     * Método de devolución de llamada invocado cuando el mapa de Google está listo para ser
+     * utilizado. Configura la interfaz de usuario del mapa (botones, brújula, etc.)
+     * @param googleMap Objeto de tipo GoogleMap que representa el mapa que se mostrará en la
+     * interfaz de usuario
+     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         // Se habilitan los botones del zoom.
@@ -284,12 +321,23 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
         configMap()
     }
 
-    /// Comprueba el estado del permiso.
+    /**
+     * Verifica si se ha concedido el permiso de acceso a la ubicación en el contexto especificado
+     * @return Valor booleano. Devuelve 'true' si el permiso ha sido concedido, y 'false' en caso
+     * contrario
+     * @see android.Manifest
+     */
     private fun isPermissionGranted() = ContextCompat.checkSelfPermission(
         contextFrag, android.Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
-    /// Comprueba el permiso de ubicación y recoloca el mapa según la ubicación.
+    /**
+     * Método encargado de configurar el mapa y realizar acciones relaciondas con la ubicación.
+     * Si se ha concedido el permiso de ubicación, se habilita la función de mostrar la ubicación
+     * actual en el mapa. Si el permiso no ha sido concedido, se solicita al usuario que otorgue
+     * el permiso
+     * @see android.Manifest
+     */
     @Suppress("MissingPermission")
     private fun configMap() {
         when {

@@ -1,3 +1,8 @@
+/**
+ * Clase que contiene los métodos para gestionar todas las acciones de CRUD contra la base
+ * de datos de Firebase
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.utils
 
 import android.content.ContentValues.TAG
@@ -21,6 +26,11 @@ class DatabaseManager {
     var urlFirebase = "gs://cuenca-movil-22b63.appspot.com"
     var pathPhotosFirebaseList = mutableListOf<String>()
 
+    /**
+     * Crea un hashMap con los datos del reporte, lo agrega como un nuevo documento a la colección
+     * 'reports' de la base de datos y maneja los casos de éxito y fallos
+     * @param dataReport Objeto de tipo ReportFirebase que se quiere añadir a la base de datos
+     */
     fun addData(dataReport: ReportFirebase) {
         val report = hashMapOf(
             "category" to dataReport.category,
@@ -44,6 +54,12 @@ class DatabaseManager {
             }
     }
 
+    /**
+     * Itera sobre una lista de archivos de fotos y los almacena en Firebase. Registra los listener
+     * que escuchan si el guardado a Firebase se ha realizado con éxito o no
+     * @param photoFileList Lista que almacena las fotos que se quieren guardar en la base
+     * de datos
+     */
     fun savePhotoToFirebaseStorage(photoFileList: MutableList<File>){
         // Create a storage reference from our app
         storage = Firebase.storage(urlFirebase)
@@ -66,9 +82,15 @@ class DatabaseManager {
         }
     }
 
+    /**
+     * Devuelve la lista de URLs de las fotos almacenadas en Firebase
+     * @return Objeto de tipo MutableList que contiene objetos de tipo String, que contienen las
+     * URLs de las fotos guardadas en Firebase
+     */
     fun getURLPhotoList() : MutableList<String>{
         return pathPhotosFirebaseList
     }
+
 
     fun getIncidents(){
         db.collection(collectionName)
@@ -114,8 +136,9 @@ class DatabaseManager {
     }
 
     /**
-     * Get all reports of the database which status fields is equal to "Aceptado"
-     *@return A list with all the accepted reports
+     * Obtiene todos los reports de la base de datos cuyo estado es 'Aceptado'. Registra un listener
+     * para escuchar si la consulta se ha realizado con éxito o no
+     * @return Objeto de tipo MutableList con los reports devueltos
      */
     suspend fun getAllReports() : MutableList<Report>{
         var reportList : MutableList<Report> = mutableListOf()

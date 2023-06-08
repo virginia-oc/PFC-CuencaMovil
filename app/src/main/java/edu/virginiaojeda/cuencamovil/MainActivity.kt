@@ -1,3 +1,8 @@
+/**
+ * Clase que contiene la actividad principal de la aplicación. Gestiona todos los fragment que
+ * se muestran en la aplicación
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil
 
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Realiza la configuración inicial de la actividad, infla el diseño, configura la barra
+     * de acción y el panel lateral y crea y muestra el fragment de inicio
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -53,8 +63,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Este método crea el primer fragment que aparece en la main activity. Como es el
-     * primer fragment se utiliza add y no replace
+     * Crea el primer fragment que aparece en la main activity. Como es el primer fragment se
+     * utiliza add y no replace
+     * @see HomeFragment
      */
     private fun createHomeFragment(){
         supportFragmentManager.beginTransaction()
@@ -64,6 +75,10 @@ class MainActivity : AppCompatActivity() {
             ).commit()
     }
 
+    /**
+     * Construye las opciones de menú en el panel lateral de navegación y establece la lógica
+     * para cada opción de menú
+     */
     private fun buildMenuOptions(){
         binding.myNavigationView.setNavigationItemSelectedListener { menuItem ->
             binding.myDrawerLayout.close()
@@ -98,6 +113,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra el fragment de inicio en la actividad principal. Además agrega la transicción a la
+     * pila de retroceso para habilitar la navegación hacia atrás
+     * @see HomeFragment
+     */
     private fun showHomeFragment(){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
@@ -110,6 +130,11 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    /**
+     * Muestra el fragment de FAQ en la actividad principal. Además agrega la transicción a la
+     * pila de retroceso para habilitar la navegación hacia atrás
+     * @see FAQFragment
+     */
     private fun showFAQFragment(){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
@@ -122,22 +147,47 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    /**
+     * Muestra el fragment de AppProblems en la actividad principal. Además agrega la transicción a la
+     * pila de retroceso para habilitar la navegación hacia atrás
+     * @see
+     */
     private fun showAppProblemsFragment(){
 
     }
 
+    /**
+     * Muestra el fragment de Share en la actividad principal. Además agrega la transicción a la
+     * pila de retroceso para habilitar la navegación hacia atrás
+     * @see
+     */
     private fun showShareFragment(){
 
     }
 
+    /**
+     * Muestra el fragment de PrivacyPolicies en la actividad principal. Además agrega la
+     * transicción a la pila de retroceso para habilitar la navegación hacia atrás
+     * @see
+     */
     private fun showPrivacyPoliciesFragment(){
 
     }
 
+    /**
+     * Muestra el fragment de Conditions en la actividad principal. Además agrega la transicción a la
+     * pila de retroceso para habilitar la navegación hacia atrás
+     * @see
+     */
     private fun showConditionsFragment(){
 
     }
 
+    /**
+     * Muestra el fragment de notificar report en la actividad principal. Además agrega la
+     * transicción a la pila de retroceso para habilitar la navegación hacia atrás
+     * @see ReportFragment
+     */
     fun showReportFragment(isIncident : Boolean){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
@@ -150,6 +200,11 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    /**
+     * Muestra el fragment del listado de reports en la actividad principal. Además agrega la
+     * transicción a la pila de retroceso para habilitar la navegación hacia atrás
+     * @see ReportsListFragment
+     */
     fun showReportsListFragment(){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(

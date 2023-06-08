@@ -1,3 +1,8 @@
+/**
+ * Clase que contiene el adaptador de la RecyclerView que muestra todos los reportes.
+ * @return Adaptador de la RecyclerView
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.adapters
 
 import android.view.LayoutInflater
@@ -9,8 +14,6 @@ import edu.virginiaojeda.cuencamovil.model.Report
 
 class ReportsRVAdapter(val reportList : MutableList<Report>?) :
         RecyclerView.Adapter<ReportsRVAdapter.ViewHolder>() {
-
-
     /**
      * Método encargado de inflar la vista
      * @param parent
@@ -33,7 +36,7 @@ class ReportsRVAdapter(val reportList : MutableList<Report>?) :
     /**
      * Esta clase se encarga de inflar cada uno de los items que contiene la RecyclerView
      * @param view
-     * * @return Objeto de tipo ViewHolder que contien el item de la RecyclerView inflado
+     * @return Objeto de tipo ViewHolder que contien el item de la RecyclerView inflado
      */
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemRvReportBinding.bind(view)

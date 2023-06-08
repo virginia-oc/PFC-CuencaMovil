@@ -1,3 +1,7 @@
+/**
+ * Clase que contiene los métodos para gestionar los archivos de imagen tomados en la cámara
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.utils
 
 import android.content.Context
@@ -8,9 +12,11 @@ import java.util.*
 
 class FilesManager {
     /**
-     * Este método devuelve el directorio donde se guardará la imagen
+     * Crea un archivo temporal con nombre único en el directorio de almacenamiento de imágenes.
+     * Devuelve el objeto File que representa el archivo creado. Dicho archivo se utilizará más
+     * tarde para almacenar una imagen
      * @param context
-     * @return Objeto de tipo File, que contiene el directorio de almacenamiento de la imagen
+     * @return Objeto de tipo File del archivo temporal creado
      */
     fun createImageFile(context: Context) : File {
         //Se crea un timeStamp para el nombre del fichero:

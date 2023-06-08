@@ -1,3 +1,7 @@
+/**
+ * Fragment que contiene los métodos para mostrar la pantalla de FAQ
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.content.Context

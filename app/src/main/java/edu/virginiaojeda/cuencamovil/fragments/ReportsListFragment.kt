@@ -1,3 +1,8 @@
+/**
+ * Fragment que contiene los métodos que muestran y configuran la recycler view que contiene
+ * la lista de todos los reportes
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.app.Activity
@@ -21,13 +26,13 @@ import kotlin.coroutines.CoroutineContext
 
 
 class ReportsListFragment() : Fragment(), CoroutineScope {
-    //Esto soluciona el problema de asincronía que hay a la hora de recuperar todos los
-    //reportes de Firebase (Firebase tiene un funcionamiento asíncrono y la vista de la
-    // recycler view se visualizaba antes de guardarse todos los reportes en la mutableList)
+    /**
+     * Variable que soluciona el problema de asincronía que hay a la hora de recuperar todos los
+     * reportes de Firebase.
+     */
     private var job: Job = Job()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
-
 
     lateinit var binding : ReportslistFragmentBinding
     private lateinit var contextFrag : Context
@@ -57,6 +62,15 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
         return binding.root
     }
 
+    /**
+     * Ejecuta una corutina para realizar operaciones asíncronas, en este caso obtener todos los
+     * reportes de Firebase, configura el adaptador de la recyclerView y muestra la lista en la
+     * interfaz de usuario
+     * @param view
+     * @param savedInstanceState
+     * @see ReportsRVAdapter
+     * @see databaseManager
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         launch{
@@ -65,13 +79,10 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
             Log.e("CANTIDAD", reportsList.size.toString())
             setUpRecyclerView()
         }
-
     }
 
-
     /**
-     * Inicializa el recycled view
-     * @param myRVAdapter
+     * Configura el recyclerView en la interfaz de usuario
      */
     private fun setUpRecyclerView() {
         // Esta opción a TRUE significa que el RV tendrá

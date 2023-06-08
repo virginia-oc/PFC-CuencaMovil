@@ -1,3 +1,7 @@
+/**
+ * Fragment que contiene los métodos para mostrar la pantalla de inicio.
+ * @author Virginia Ojeda Corona
+ */
 package edu.virginiaojeda.cuencamovil.fragments
 
 import android.content.Context
@@ -33,6 +37,11 @@ class HomeFragment : Fragment(){
         return binding.root
     }
 
+    /**
+     * Crea los eventos de click para cada botón de la pantalla de inicio
+     * @param view
+     * @param savedInstanceState
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
