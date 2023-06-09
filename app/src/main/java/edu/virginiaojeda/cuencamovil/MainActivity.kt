@@ -7,11 +7,10 @@ package edu.virginiaojeda.cuencamovil
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import edu.virginiaojeda.cuencamovil.databinding.ActivityMainBinding
-import edu.virginiaojeda.cuencamovil.fragments.FAQFragment
+import edu.virginiaojeda.cuencamovil.fragments.TemporalFragment
 import edu.virginiaojeda.cuencamovil.fragments.HomeFragment
 import edu.virginiaojeda.cuencamovil.fragments.ReportFragment
 import edu.virginiaojeda.cuencamovil.fragments.ReportsListFragment
@@ -133,13 +132,13 @@ class MainActivity : AppCompatActivity() {
     /**
      * Muestra el fragment de FAQ en la actividad principal. Además agrega la transicción a la
      * pila de retroceso para habilitar la navegación hacia atrás
-     * @see FAQFragment
+     * @see TemporalFragment
      */
     private fun showFAQFragment(){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
                 binding.fragmentContainer.id,
-                FAQFragment()
+                TemporalFragment()
             )
             // Permite la vuelta "atrás".
             addToBackStack(null)
@@ -153,7 +152,15 @@ class MainActivity : AppCompatActivity() {
      * @see
      */
     private fun showAppProblemsFragment(){
-
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                TemporalFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     /**
@@ -162,7 +169,15 @@ class MainActivity : AppCompatActivity() {
      * @see
      */
     private fun showShareFragment(){
-
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                TemporalFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     /**
@@ -171,7 +186,15 @@ class MainActivity : AppCompatActivity() {
      * @see
      */
     private fun showPrivacyPoliciesFragment(){
-
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                TemporalFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     /**
@@ -180,7 +203,15 @@ class MainActivity : AppCompatActivity() {
      * @see
      */
     private fun showConditionsFragment(){
-
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                TemporalFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     /**
