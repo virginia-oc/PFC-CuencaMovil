@@ -23,15 +23,19 @@ class MainActivity : AppCompatActivity() {
 
     private val myBackPressed = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
+            var currentFragment =
+                supportFragmentManager.findFragmentById(binding.fragmentContainer.id)
             var stackFragments = supportFragmentManager.backStackEntryCount
+
             if (binding.myDrawerLayout.isOpen) {
                 binding.myDrawerLayout.close()
-            } else if (stackFragments != 0){
+            } else if (currentFragment is HomeFragment) {
+                showExitConfirmDialog()
+            } else if (stackFragments != 0) {
                 supportFragmentManager.popBackStack()
             } else {
-
+                showExitConfirmDialog()
             }
-                finish()
         }
     }
 
@@ -75,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 binding.fragmentContainer.id,
                 HomeFragment()
             )
-            .addToBackStack(null)
             .commit()
     }
 
@@ -146,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                 ReportFragment(activity, isIncident)
             )
             // Permite la vuelta "atrás".
-            //addToBackStack(null)
+            addToBackStack(null)
         }
         transaction.commit()
     }
@@ -186,18 +189,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *
+     * Muestra un alert dialog pidiendo confirmación para salir de la aplicación
      */
     private fun showExitConfirmDialog() {
-        val alertDialog = AlertDialog.Builder(this.applicationContext)
-            .setTitle(R.string.title_dialogReport)
-            .setMessage(R.string.message_dialogReport)
-            .setPositiveButton(R.string.option_dialogReport) { dialog, _ ->
+        val alertDialog = AlertDialog.Builder(this).apply {
+            setTitle(R.string.title_dialogExitApp)
+            setMessage(R.string.message_dialogExitApp)
+            setPositiveButton(R.string.option1_dialogExitApp) { dialog, _ ->
                 // Acciones a realizar cuando se presiona el botón "Aceptar"
                 dialog.dismiss() // Cerrar el diálogo
-                (activity as MainActivity).showHomeFragment()
+                finish()
             }
-            .create()
+            setNegativeButton(R.string.option2_dialogExitApp){ dialog, _ ->
+                dialog.dismiss()
+            }
+        }.create()
         alertDialog.show()
     }
 }

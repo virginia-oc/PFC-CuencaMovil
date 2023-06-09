@@ -41,7 +41,7 @@
     <string name="title_dialogExitApp">Salir de la aplicación</string>
     <string name="message_dialogExitApp">¿Desea salir de la aplicación?</string>
     <string name="option1_dialogExitApp">Salir</string>
-    <string name="option2_dialogExitApp">Continuar conectado</string>
+    <string name="option2_dialogExitApp">Seguir conectado</string>
 
     <string-array name="status">
         <item>Enviado</item>
