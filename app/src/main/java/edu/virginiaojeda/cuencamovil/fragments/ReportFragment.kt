@@ -12,7 +12,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.location.Location
-import androidx.exifinterface.media.ExifInterface
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -25,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -71,10 +71,6 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
     override fun onAttach(context: Context) {
         super.onAttach(context)
         contextFrag = context
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(

@@ -5,10 +5,8 @@
  */
 package edu.virginiaojeda.cuencamovil.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +36,6 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
     private lateinit var contextFrag : Context
     private var databaseManager = DatabaseManager()
     private lateinit var reportsRVAdapter : ReportsRVAdapter
-    val TAG = "ReportListFragment"
 
     companion object{
         private lateinit var reportsList : MutableList<Report>
@@ -47,10 +44,6 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         contextFrag = context
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -76,7 +69,7 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
         launch{
             reportsList = databaseManager.getAllReports()
             reportsRVAdapter = ReportsRVAdapter(reportsList)
-            Log.e("CANTIDAD", reportsList.size.toString())
+            //Log.e("CANTIDAD", reportsList.size.toString())
             setUpRecyclerView()
         }
     }
@@ -94,33 +87,8 @@ class ReportsListFragment() : Fragment(), CoroutineScope {
         binding.rvReportsList.adapter = reportsRVAdapter
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onResume() {
-        Log.d(TAG, "onResume")
-        super.onResume()
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-        super.onPause()
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG, "onDestroyView")
-        super.onDestroyView()
-    }
-
     override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
         super.onDestroy()
         job.cancel()
-    }
-
-    override fun onDetach() {
-        Log.d(TAG, "onDetach")
-        super.onDetach()
     }
 }

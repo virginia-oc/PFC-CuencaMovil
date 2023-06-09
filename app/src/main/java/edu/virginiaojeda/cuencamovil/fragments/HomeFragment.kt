@@ -24,10 +24,6 @@ class HomeFragment : Fragment(){
         contextFrag = context
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,6 +51,18 @@ class HomeFragment : Fragment(){
 
         binding.btnAllReports.setOnClickListener(){
             (activity as MainActivity).showReportsListFragment()
+        }
+
+        binding.btnMyReports.setOnClickListener(){
+            (activity as MainActivity).showTemporalFragment()
+        }
+
+        binding.btnAssociations.setOnClickListener(){
+            (activity as MainActivity).showTemporalFragment()
+        }
+
+        binding.btnSocialMedia.setOnClickListener(){
+            (activity as MainActivity).showTemporalFragment()
         }
     }
 

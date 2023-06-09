@@ -5,15 +5,15 @@
  */
 package edu.virginiaojeda.cuencamovil
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import edu.virginiaojeda.cuencamovil.databinding.ActivityMainBinding
-import edu.virginiaojeda.cuencamovil.fragments.TemporalFragment
 import edu.virginiaojeda.cuencamovil.fragments.HomeFragment
 import edu.virginiaojeda.cuencamovil.fragments.ReportFragment
 import edu.virginiaojeda.cuencamovil.fragments.ReportsListFragment
+import edu.virginiaojeda.cuencamovil.fragments.TemporalFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 binding.myDrawerLayout.close()
             } else if (stackFragments != 0){
                 supportFragmentManager.popBackStack()
-            }else
+            } else
                 finish()
         }
     }
@@ -88,23 +88,23 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 (R.id.item11) -> {
-                    showFAQFragment()
+                    showTemporalFragment()
                     true
                 }
                 (R.id.item12) -> {
-                    showAppProblemsFragment()
+                    showTemporalFragment()
                     true
                 }
                 (R.id.item21) -> {
-                    showShareFragment()
+                    showTemporalFragment()
                     true
                 }
                 (R.id.item31) -> {
-                    showPrivacyPoliciesFragment()
+                    showTemporalFragment()
                     true
                 }
                 (R.id.item32) -> {
-                    showConditionsFragment()
+                    showTemporalFragment()
                     true
                 }
                 else -> false
@@ -122,91 +122,6 @@ class MainActivity : AppCompatActivity() {
             replace(
                 binding.fragmentContainer.id,
                 HomeFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
-    /**
-     * Muestra el fragment de FAQ en la actividad principal. Además agrega la transicción a la
-     * pila de retroceso para habilitar la navegación hacia atrás
-     * @see TemporalFragment
-     */
-    private fun showFAQFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                TemporalFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
-    /**
-     * Muestra el fragment de AppProblems en la actividad principal. Además agrega la transicción a la
-     * pila de retroceso para habilitar la navegación hacia atrás
-     * @see
-     */
-    private fun showAppProblemsFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                TemporalFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
-    /**
-     * Muestra el fragment de Share en la actividad principal. Además agrega la transicción a la
-     * pila de retroceso para habilitar la navegación hacia atrás
-     * @see
-     */
-    private fun showShareFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                TemporalFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
-    /**
-     * Muestra el fragment de PrivacyPolicies en la actividad principal. Además agrega la
-     * transicción a la pila de retroceso para habilitar la navegación hacia atrás
-     * @see
-     */
-    private fun showPrivacyPoliciesFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                TemporalFragment()
-            )
-            // Permite la vuelta "atrás".
-            addToBackStack(null)
-        }
-        transaction.commit()
-    }
-
-    /**
-     * Muestra el fragment de Conditions en la actividad principal. Además agrega la transicción a la
-     * pila de retroceso para habilitar la navegación hacia atrás
-     * @see
-     */
-    private fun showConditionsFragment(){
-        val transaction = supportFragmentManager.beginTransaction().apply {
-            replace(
-                binding.fragmentContainer.id,
-                TemporalFragment()
             )
             // Permite la vuelta "atrás".
             addToBackStack(null)
@@ -241,6 +156,23 @@ class MainActivity : AppCompatActivity() {
             replace(
                 binding.fragmentContainer.id,
                 ReportsListFragment()
+            )
+            // Permite la vuelta "atrás".
+            addToBackStack(null)
+        }
+        transaction.commit()
+    }
+
+    /**
+     * Muestra un fragment temporal que notifica al usuario que la funcionalidad a la que está
+     * intentando acceder está en construcción
+     * @see TemporalFragment
+     */
+    fun showTemporalFragment(){
+        val transaction = supportFragmentManager.beginTransaction().apply {
+            replace(
+                binding.fragmentContainer.id,
+                TemporalFragment()
             )
             // Permite la vuelta "atrás".
             addToBackStack(null)

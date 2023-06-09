@@ -7,17 +7,16 @@ package edu.virginiaojeda.cuencamovil.utils
 
 import android.content.ContentValues.TAG
 import android.net.Uri
-import android.os.Debug
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import edu.virginiaojeda.cuencamovil.model.Report
-import java.io.File
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import edu.virginiaojeda.cuencamovil.model.Report
 import edu.virginiaojeda.cuencamovil.model.ReportFirebase
 import kotlinx.coroutines.tasks.await
+import java.io.File
 
 class DatabaseManager {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -89,50 +88,6 @@ class DatabaseManager {
      */
     fun getURLPhotoList() : MutableList<String>{
         return pathPhotosFirebaseList
-    }
-
-
-    fun getIncidents(){
-        db.collection(collectionName)
-            .whereEqualTo("incident", true)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
-    }
-
-    fun getRequests(){
-        db.collection(collectionName)
-            .whereEqualTo("incident", false)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
-    }
-
-    fun getReportsByUser(user : String){
-        //en id podría poner el email del usuario registrado
-        db.collection(collectionName)
-            .whereEqualTo("id", "")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
     }
 
     /**

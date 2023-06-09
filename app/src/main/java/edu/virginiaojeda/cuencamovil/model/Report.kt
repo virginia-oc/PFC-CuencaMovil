@@ -40,5 +40,4 @@ data class Report(
     override fun toString(): String {
         return this.id + " - " + this.dateTime + " - " + this.latitude + " - " + this.longitude + " - " + this.category + " - " + this.description + " - " + this.isIncident + " - " + this.status
     }
-
 }
