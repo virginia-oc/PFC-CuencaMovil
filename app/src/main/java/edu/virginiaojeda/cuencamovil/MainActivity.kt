@@ -5,6 +5,7 @@
  */
 package edu.virginiaojeda.cuencamovil
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
                 binding.myDrawerLayout.close()
             } else if (stackFragments != 0){
                 supportFragmentManager.popBackStack()
-            } else
+            } else {
+
+            }
                 finish()
         }
     }
@@ -71,7 +74,9 @@ class MainActivity : AppCompatActivity() {
             .add(
                 binding.fragmentContainer.id,
                 HomeFragment()
-            ).commit()
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     /**
@@ -117,7 +122,7 @@ class MainActivity : AppCompatActivity() {
      * pila de retroceso para habilitar la navegación hacia atrás
      * @see HomeFragment
      */
-    private fun showHomeFragment(){
+    fun showHomeFragment(){
         val transaction = supportFragmentManager.beginTransaction().apply {
             replace(
                 binding.fragmentContainer.id,
@@ -141,7 +146,7 @@ class MainActivity : AppCompatActivity() {
                 ReportFragment(activity, isIncident)
             )
             // Permite la vuelta "atrás".
-            addToBackStack(null)
+            //addToBackStack(null)
         }
         transaction.commit()
     }
@@ -178,5 +183,21 @@ class MainActivity : AppCompatActivity() {
             addToBackStack(null)
         }
         transaction.commit()
+    }
+
+    /**
+     *
+     */
+    private fun showExitConfirmDialog() {
+        val alertDialog = AlertDialog.Builder(this.applicationContext)
+            .setTitle(R.string.title_dialogReport)
+            .setMessage(R.string.message_dialogReport)
+            .setPositiveButton(R.string.option_dialogReport) { dialog, _ ->
+                // Acciones a realizar cuando se presiona el botón "Aceptar"
+                dialog.dismiss() // Cerrar el diálogo
+                (activity as MainActivity).showHomeFragment()
+            }
+            .create()
+        alertDialog.show()
     }
 }

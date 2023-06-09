@@ -7,6 +7,7 @@ package edu.virginiaojeda.cuencamovil.fragments
 
 import android.Manifest.permission.CAMERA
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -223,9 +224,6 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
             databaseManager.savePhotoToFirebaseStorage(photoFileList)
 
             val validateFields = ValidateFields(binding, contextFrag)
-            validateFields.validateCategory()
-            validateFields.validateDescription()
-            validateFields.validateLocation()
             val dateTime = validateFields.createDateTime()
 
             val dataReport = ReportFirebase(
@@ -238,7 +236,25 @@ class ReportFragment (activity: Activity, isIncident : Boolean): Fragment(), OnM
                 databaseManager.getURLPhotoList()
             )
             databaseManager.addData(dataReport)
+            showSuccessDialog()
         }
+    }
+
+    /**
+     * Muestra un alertDialog notificando al usuario que el reporte ha sido guardado con éxito
+     * en la base de datos. Pulsar el botón de 'Aceptar' devuelve de nuevo al inicio
+     */
+    private fun showSuccessDialog() {
+        val alertDialog = AlertDialog.Builder(contextFrag)
+            .setTitle(R.string.title_dialogReport)
+            .setMessage(R.string.message_dialogReport)
+            .setPositiveButton(R.string.option_dialogReport) { dialog, _ ->
+                // Acciones a realizar cuando se presiona el botón "Aceptar"
+                dialog.dismiss() // Cerrar el diálogo
+                (activity as MainActivity).showHomeFragment()
+            }
+            .create()
+        alertDialog.show()
     }
 
     /**

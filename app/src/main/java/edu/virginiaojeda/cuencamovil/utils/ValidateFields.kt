@@ -13,27 +13,6 @@ import java.util.*
 class ValidateFields(val binding: ReportFragmentBinding, val context: Context) {
 
     /**
-     * Método que valida la categoría
-     */
-    fun validateCategory() {
-        TODO("Not yet implemented")
-    }
-
-    /**
-     * Método que valida la descripción
-     */
-    fun validateDescription() {
-        TODO("Not yet implemented")
-    }
-
-    /**
-     * Método que valida la localización (latitud y longitud)
-     */
-    fun validateLocation() {
-        TODO("Not yet implemented")
-    }
-
-    /**
      * Método que obtiene la fecha y la hora actuales y las devuelve en un string con un formato
      * determinado
      */
